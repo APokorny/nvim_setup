@@ -17,6 +17,24 @@ return {
       end,
       desc = "Pick to close",
     },
+    ["<leader>gR"] = {
+      function()
+        local isDiff = vim.fn.getwinvar(nil, "&diff")
+        local bufName = vim.api.nvim_buf_get_name(0)
+        if isDiff ~= 0 or u.string_starts(bufName, "diff") then
+          vim.cmd.tabclose()
+          vim.cmd.tabprev()
+        else
+          vim.cmd.DiffviewOpen("main")
+        end
+      end,
+      desc = "Open DiffView against main",
+    },
+    ["<leader>gms"] = { function() require("gitlab").summary() end, desc = "Git MR summary" },
+    ["<leader>gma"] = { function() require("gitlab").approve() end, desc = "Git MR approve" },
+    ["<leader>gmR"] = { function() require("gitlab").revoke() end, desc = "Git MR revoke" },
+    ["<leader>gmc"] = { function() require("gitlab").create_comment() end, desc = "Git MR comment" },
+    ["<leader>gmd"] = { function() require("gitlab").list_discussions() end, desc = "Show MR disccussions" },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },

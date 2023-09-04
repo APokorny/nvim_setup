@@ -1,5 +1,6 @@
 return {
   "harrisoncramer/gitlab.nvim",
+  branch="self-hosted",
   dependencies = {
     "MunifTanjim/nui.nvim",
     "nvim-lua/plenary.nvim"
